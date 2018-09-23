@@ -1,0 +1,51 @@
+.itemImageThumb {
+    max-height: 200px;
+    border-radius: .25rem;
+    max-width: 100%;
+}
+
+.itemListResult {
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.itemDetail {
+    text-align: center;
+}
+
+.authContainer {
+    text-align: center;
+}
+
+.itemDetailImg {
+    max-height: 700px;
+}
+
+.siteTitle {
+    padding-left: 10px;
+}
+
+.itemListContainer {
+    width: 80%;
+    float: right;
+}
+
+.categoriesContainer {
+    width: 20%;
+    float: left;
+    padding-left: 10px;
+}
+
+.categoryLink {
+    display: block;
+    padding-bottom: 5px;
+}
+
+.userBar {
+    text-align: right;
+    padding-bottom: 10px;
+    padding-right: 20px;
+}
+.form-inline {
+    display: inline-block;
+}

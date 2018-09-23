@@ -1,0 +1,30 @@
+<!DOCTYPE html >
+<html th:replace="~{layoutFile :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Ads</title>
+</head>
+<body>
+<section>
+    <div class="userBar">
+        <span th:if="${loggedIn}">Hi <span th:text="${username}">UserName</span>!</span>
+        <span th:unless="${loggedIn}">You are not logged in! </span>
+        <span>
+        <form class="form-inline" th:if="${loggedIn}" action="logout" method="POST">
+            <input type="submit" value="Logout"/>
+        </form>
+        <span th:unless="${loggedIn}"><a href="/login/auth">Login</a></span>
+    </span>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="itemListResult col-md-4" th:each="item: ${items}">
+                <a th:href="@{~/ad(id=${item.id})}"><img class="itemImageThumb" th:attr="src=${item.imgUrl}" /></a>
+                <div class="itemName" th:text="${item.name}">Name</div>
+                <div><span class="itemPrice" th:text="${item.price}">Price</span> EUR</div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

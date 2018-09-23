@@ -1,0 +1,47 @@
+micronaut:
+  application:
+    name: alexslist
+  server:
+    port: 8080
+  security:
+    enabled: true
+    endpoints:
+      login:
+        enabled: true
+      logout:
+        enabled: true
+    session:
+      enabled: true
+      loginSuccessTargetUrl: /
+      loginFailureTargetUrl: /login/authFailed
+    interceptUrlMap:
+    - pattern: /static/*
+      httpMethod: GET
+      access:
+        - isAnonymous()
+    - pattern: /
+      httpMethod: GET
+      access:
+        - isAnonymous()
+    - pattern: /login/*
+      httpMethod: GET
+      access:
+        - isAnonymous()
+    - pattern: /login
+      httpMethod: POST
+      access:
+        - isAnonymous()
+    - pattern: /myAds
+      httpMethod: GET
+      access:
+        - isAuthenticated()
+    - pattern: /ad
+      httpMethod: GET
+      access:
+        - isAuthenticated()
+  router:
+    static:
+      resources:
+        enabled: true
+        mapping: /static/**
+        paths: classpath:public

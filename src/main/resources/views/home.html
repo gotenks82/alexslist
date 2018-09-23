@@ -1,0 +1,39 @@
+<!DOCTYPE html >
+<html th:replace="~{layoutFile :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>alexslist</title>
+</head>
+<body>
+<section>
+    <div class="userBar">
+    <span th:if="${loggedIn}">Hi <span th:text="${username}">UserName</span>!</span>
+        <span th:if="${loggedIn}"><a href="/myAds">Your Items</a></span>
+    <span th:unless="${loggedIn}">You are not logged in! </span>
+    <span>
+        <form class="form-inline" th:if="${loggedIn}" action="logout" method="POST">
+            <input type="submit" value="Logout"/>
+        </form>
+        <span th:unless="${loggedIn}"><a href="/login/auth">Login</a></span>
+    </span>
+    </div>
+
+    <div class="categoriesContainer">
+        <span class="categoryLink" id="allCategoriesLink">
+            <span><a th:href="@{~/}"><b>All Categories</b></a></span> (<a th:text="${totalItems}" th:href="@{~/}">Total</a>)
+        </span>
+        <span class="categoryLink" th:each="cat: ${categories}">
+            <a th:text="${cat.key}" th:href="@{~/(category=${cat.key})}">Category</a> (<a th:text="${cat.value}" th:href="@{~/(category=${cat.key})}">CategoryLink</a>)
+        </span>
+    </div>
+    <div id="itemListContainer" class="container-fluid">
+        <div class="row">
+            <div class="itemListResult col-md-4" th:each="item: ${items}">
+                <a th:href="@{~/ad(id=${item.id})}"><img class="itemImageThumb" th:attr="src=${item.imgUrl}" /></a>
+                <div class="itemName" th:text="${item.name}">Name</div>
+                <div><span class="itemPrice" th:text="${item.price}">Price</span> EUR</div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

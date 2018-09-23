@@ -1,0 +1,31 @@
+<!DOCTYPE html >
+<html th:replace="~{layoutFile :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:if="${errors}">Login Failed</title>
+    <title th:unless="${errors}">Login</title>
+</head>
+<body>
+<section>
+    <div class="authContainer">
+        <form action="/login" method="POST">
+            <div>
+                <div>
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username"/>
+                </div>
+                <div>
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password"/>
+                </div>
+                <div>
+                    <input type="submit" value="Login"/>
+                </div>
+                <div th:if="${errors}" id="errors">
+                    <span style="color: red;">Login Failed</span>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+</body>
+</html>

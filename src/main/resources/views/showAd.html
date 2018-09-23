@@ -1,0 +1,29 @@
+<!DOCTYPE html >
+<html th:replace="~{layoutFile :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${item.name}">title</title>
+</head>
+<body>
+<section>
+    <div class="userBar">
+    <span th:if="${loggedIn}">Hi <span th:text="${username}">UserName</span>!</span>
+        <span th:if="${loggedIn}"><a href="/myAds">Your Items</a></span>
+    <span th:unless="${loggedIn}">You are not logged in! </span>
+    <span>
+        <form class="form-inline" th:if="${loggedIn}" action="logout" method="POST">
+            <input type="submit" value="Logout"/>
+        </form>
+        <span th:unless="${loggedIn}"><a href="/login/auth">Login</a></span>
+    </span>
+    </div>
+
+    <div class="itemDetail">
+        <div class="itemDetailName" th:text="${item.name}">Name</div>
+        <div class="itemDetailName" th:text="${item.description}">Description</div>
+        <div><span class="itemPrice" th:text="${item.price}">Price</span> EUR</div>
+        <div>Seller: <span class="itemSeller" th:text="${seller}">Seller</span></div>
+        <div><img class="itemDetailImg" th:attr="src=${item.imgUrl}" /></div>
+    </div>
+</section>
+</body>
+</html>
