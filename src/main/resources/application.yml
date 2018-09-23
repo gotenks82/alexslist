@@ -38,7 +38,7 @@ micronaut:
     - pattern: /ad
       httpMethod: GET
       access:
-        - isAuthenticated()
+        - isAnonymous()
   router:
     static:
       resources:
