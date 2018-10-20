@@ -1,5 +1,6 @@
 package example.controllers
 
+import example.clients.models.TradeStepWithUserName
 import example.services.ItemService
 import example.services.MiddleManService
 import example.services.UserService
@@ -70,6 +71,42 @@ class HomeController(
                 "username" to user?.name,
                 "item" to item,
                 "seller" to userService.findUserById(item.userId)?.name
+        )
+    }
+
+    @Secured("isAuthenticated()")
+    @View("mytrades")
+    @Get("/myTrades")
+    fun showTrades(principal: Principal): Map<String, Any?> = principal.let {
+        val user = requireNotNull(principal.name.let { userService.findUserByEmail(it) })
+        val trades = middleManService.getTrades(user)
+
+        mapOf(
+                "tradesFound" to trades.isNotEmpty(),
+                "loggedIn" to true,
+                "trades" to trades,
+                "username" to user.name
+        )
+    }
+
+    @Secured("isAuthenticated()")
+    @View("mytrade")
+    @Get("/myTrade")
+    fun showTrades(principal: Principal, id: String): Map<String, Any?> = principal.let {
+        val user = requireNotNull(principal.name.let { userService.findUserByEmail(it) })
+        val trade = middleManService.getTrade(id)
+
+        val stepsWithName = trade.steps.map {
+            val buyerName = requireNotNull(userService.findUserById(it.userId)).name
+            val sellerName = requireNotNull(userService.findUserById(it.interest.itemUserid)).name
+            TradeStepWithUserName(it.userId, it.interest, buyerName, sellerName)
+        }
+
+        mapOf(
+                "loggedIn" to true,
+                "steps" to stepsWithName,
+                "summary" to trade.toSummary(user.id),
+                "username" to user.name
         )
     }
 

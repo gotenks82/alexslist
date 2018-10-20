@@ -1,0 +1,52 @@
+<!DOCTYPE html >
+<html th:replace="~{layoutFile :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Trades</title>
+</head>
+<body>
+<section>
+    <div class="userBar">
+        <span th:if="${loggedIn}">Hi <span th:text="${username}">UserName</span>! |</span>
+        <span th:if="${loggedIn}"><a href="/myAds">Your Items</a> |</span>
+        <span th:if="${loggedIn}"><a href="/myTrades">Your Trades</a> |</span>
+        <span th:unless="${loggedIn}">You are not logged in! |</span>
+        <span>
+        <form class="form-inline" th:if="${loggedIn}" action="logout" method="POST">
+            <input type="submit" value="Logout"/>
+        </form>
+        <span th:unless="${loggedIn}"><a href="/login/auth">Login</a></span>
+    </span>
+    </div>
+    <div class="tradeTitle">Suggested Trade</span></div>
+    <div class="container-fluid tradeContainer">
+        <div class="row">
+            <div class="tradeListResult col-md-4">
+                <div class="tradeItem">
+                    <div class="giveImg"><img src="static/give.png"></div>
+                    <img class="tradeItemImg" th:attr="src=${summary.selling.itemImageUrl}"/>
+                    <span class="deltaMoney" th:if="${summary.priceDelta < 0}"> + <span th:text="${0 - summary.priceDelta}"></span>&euro;</span>
+                </div>
+                <div class="tradeSteps">
+                    <img src="/static/cycle.jpg"/>
+                    <span class="additionalPeopleDiv">...You and <span th:text="${summary.getAdditionalPeople()}">N</span> More People Involved</span>
+                </div>
+                <div class="tradeItem">
+                    <img class="tradeItemImg" th:attr="src=${summary.buying.itemImageUrl}"/>
+                    <span class="deltaMoney" th:if="${summary.priceDelta > 0}"> + <span th:text="${summary.priceDelta}"></span>&euro;</span>
+                    <img class="getImg" src="static/get.png">
+                </div>
+                <div class="tradeStatus">
+                    <span>Status: <b><span th:text="${summary.tradeStatus}"></span></b></span>
+                </div>
+            </div>
+
+            <div class="tradeListResult col-md-8">
+                <div class="tradeStep" th:each="step,iter: ${steps}">
+                    <span th:text="${iter.index + 1}">Number</span>. <span th:text="${step.buyerName}">Buyer</span> buys <img class="stepItemImg" th:alt-title="${step.interest.itemName}" th:attr="src=${step.interest.itemImageUrl}"/> from <span th:text="${step.sellerName}">Seller</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

@@ -19,6 +19,10 @@ class MiddleManService @Inject constructor(
     }
 
     fun getNotifications(user: User) = middleManClient.getNotifications(user.id)
+
+    fun getTrades(user: User) = middleManClient.getTrades(user.id)
+
+    fun getTrade(tradeId: String) = middleManClient.getTrade(tradeId)
 }
 
 private fun Item.toInterest() = Interest(

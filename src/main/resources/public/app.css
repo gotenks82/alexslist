@@ -8,6 +8,11 @@
     padding-bottom: 20px;
     text-align: center;
 }
+.tradeListResult {
+    padding-bottom: 20px;
+    text-align: center;
+    border-style: outset;
+}
 
 .itemDetail {
     text-align: center;
@@ -53,11 +58,83 @@
 #notifications {
     position: fixed;
     top: 5px;
-    left:2%;
-    width: 96%;
+    margin-left:10%;
+    width: 80%;
 }
 
 .alert {
     margin: auto;
-    width: 60%;
+    width: 95%;
+}
+
+.giveImg {
+    position: absolute;
+    text-align: left;
+}
+
+.giveImg img {
+    width: 40%;
+    background-color: rgba(255,255,255,.5);
+}
+
+.tradeItemImg {
+    width: 50%;
+}
+
+.getImg {
+    position: absolute;
+    width: 20%;
+    right: 0%;
+    bottom: 2%;
+    background-color: rgba(255,255,255,.5);
+}
+
+.deltaMoney {
+    font-weight: bold;
+    font-size: xx-large;
+}
+
+.additionalPeopleDiv {
+    position: absolute;
+    top: 35%;
+    font-weight: bold;
+    font-size: large;
+    width: 80%;
+    left: 10%;
+    height: 20%;
+}
+
+.cycleImg {
+    opacity: 0.6;
+}
+
+.tradeContainer {
+    width: 80%;
+}
+
+.tradeItem {
+    position: relative;
+}
+
+.tradeSteps {
+    position: relative;
+}
+.tradeSteps img {
+    opacity: 0.65;
+}
+.tradeStatus {
+    padding-top: 10px;
+    position: relative;
+}
+.tradeTitle {
+    text-align: center;
+    font-weight: 900;
+}
+
+.stepItemImg{
+    max-height: 100px;
+}
+.tradeStep {
+
+    padding-bottom: 20px;
 }

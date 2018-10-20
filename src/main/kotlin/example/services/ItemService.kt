@@ -58,7 +58,7 @@ class ItemService {
     }
 
     private fun createItems(): List<Item> {
-        return 0.rangeTo(20).map { i ->
+        return 0.rangeTo(30).map { i ->
             val (name, category) = itemNames.shuffled().first()
             Item(
                     id = i.toString(),
