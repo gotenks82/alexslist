@@ -39,9 +39,18 @@ micronaut:
       httpMethod: GET
       access:
         - isAnonymous()
+    - pattern: /myNotifications
+      httpMethod: GET
+      access:
+        - isAuthenticated()
   router:
     static:
       resources:
         enabled: true
         mapping: /static/**
         paths: classpath:public
+  http:
+    services:
+      middleman:
+        urls:
+        - http://localhost:8085

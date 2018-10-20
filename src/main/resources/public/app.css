@@ -49,3 +49,26 @@
 .form-inline {
     display: inline-block;
 }
+
+#notifications {
+    position: fixed;
+    top: 5px;
+    left:2%;
+    width: 96%;
+}
+
+.alert {
+    margin: auto;
+    width: 60%;
+}
+
+.fade {
+    opacity: 0;
+    -webkit-transition: opacity 0.15s linear;
+    -moz-transition: opacity 0.15s linear;
+    -o-transition: opacity 0.15s linear;
+    transition: opacity 0.15s linear;
+}
+.fade.in {
+    opacity: 1;
+}
