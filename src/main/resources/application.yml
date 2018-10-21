@@ -54,3 +54,7 @@ micronaut:
       middleman:
         urls:
         - http://localhost:8085
+jackson:
+  serialization:
+    indentOutput: true
+    writeDatesAsTimestamps: false

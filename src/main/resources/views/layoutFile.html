@@ -18,6 +18,16 @@
 <script th:if="${loggedIn}">
     $( document ).ready(function() {
         setInterval(getNotifications, 2000)
+        if( $('#chatMessagesDiv').length ) {
+            setInterval(refreshChat($("#tradeId").val()), 1000);
+
+            $(".newMessage").on( "keypress", function(event) {
+                if (event.which == 13 && !event.shiftKey) {
+                    event.preventDefault();
+                    sendMessage();
+                }
+            });
+        }
     });
 </script>
 </body>

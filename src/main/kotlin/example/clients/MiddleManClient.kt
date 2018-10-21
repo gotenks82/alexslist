@@ -1,9 +1,6 @@
 package example.clients
 
-import example.clients.models.Interest
-import example.clients.models.TradeOpportunity
-import example.clients.models.TradeOpportunityStatus
-import example.clients.models.TradeSummary
+import example.clients.models.*
 import io.micronaut.http.annotation.Body
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.Post
@@ -26,4 +23,10 @@ interface MiddleManClient {
 
     @Post("/user/{id}/trades/{tradeId}/status/{status}")
     fun updateStatus(id: String, tradeId: String, status: TradeOpportunityStatus)
+
+    @Get("/trade/{id}/messages")
+    fun getMessages(id: String) : List<ChatMessage>
+
+    @Post("/user/{id}/trades/{tradeId}/messages")
+    fun postMessage(id: String, tradeId: String, @Body body: Map<String, String>)
 }

@@ -1,11 +1,14 @@
 package example.controllers
 
+import example.clients.models.ChatMessage
 import example.clients.models.TradeOpportunityStatus
 import example.clients.models.TradeStepWithUserName
+import example.models.TradeMessage
 import example.models.TradeUpdate
 import example.services.ItemService
 import example.services.MiddleManService
 import example.services.UserService
+import io.micronaut.http.HttpResponse.accepted
 import io.micronaut.http.HttpResponse.ok
 import io.micronaut.http.MediaType
 import io.micronaut.http.MutableHttpResponse
@@ -120,4 +123,20 @@ class HomeController(
         ok(emptyMap<String, String>())
     }
 
+    @Secured("isAuthenticated()")
+    @Post("/messageTrade")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    fun postMessage(principal: Principal, @Body msg: TradeMessage):  MutableHttpResponse<Any?> = principal.let {
+        val user = requireNotNull(principal.name.let { userService.findUserByEmail(it) })
+        middleManService.postMessage(user, msg.tradeId, msg.content)
+        ok(emptyMap<String, String>())
+    }
+
+    @Secured("isAuthenticated()")
+    @Get("/messages")
+    @Produces(MediaType.APPLICATION_JSON)
+    fun getMessages(principal: Principal, tradeId: String): MutableHttpResponse<Any?> = ok(mapOf("messages" to (middleManService.getMessages(tradeId).map {
+            it.copy(from = requireNotNull(userService.findUserById(it.from)).name)
+        })))
 }

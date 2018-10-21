@@ -18,6 +18,7 @@
     </span>
     </div>
     <div class="tradeTitle">Suggested Trade</span></div>
+    <input type="hidden" id="tradeId" th:value="${summary.id}">
     <div class="container-fluid tradeContainer">
         <div class="row">
             <div class="tradeDetail col-md-4">
@@ -51,12 +52,22 @@
         </div>
         <div class="row" th:if="${summary.isPending()}">
             <div class="statusForm">
-                <input type="hidden" id="tradeId" th:value="${summary.id}">
                 <div class="tradeStatusChange">
                     <img id="acceptTrade" src="/static/accept.png">
                     <span class="statusChangeButtonSpacer"></span>
                     <img id="rejectTrade" src="/static/reject.png">
                 </div>
+            </div>
+        </div>
+        <div class="row" th:unless="${summary.isRejected()}">
+            <div class="chatMessageContainer">
+            <div id="chatMessagesDiv" class="chatMessageBox">
+
+            </div>
+            <div class="sendMessageDiv">
+                <input type="text" class="newMessage">
+                <img src="/static/send.png" onclick="sendMessage();">
+            </div>
             </div>
         </div>
     </div>

@@ -26,6 +26,10 @@ class MiddleManService @Inject constructor(
     fun getTrade(tradeId: String) = middleManClient.getTrade(tradeId)
 
     fun updateStatus(user: User, tradeId: String, status: TradeOpportunityStatus) = middleManClient.updateStatus(user.id, tradeId, status)
+
+    fun getMessages(tradeId: String) = middleManClient.getMessages(tradeId)
+
+    fun postMessage(user: User, tradeId: String, content: String) = middleManClient.postMessage(user.id, tradeId, mapOf("content" to content))
 }
 
 private fun Item.toInterest() = Interest(

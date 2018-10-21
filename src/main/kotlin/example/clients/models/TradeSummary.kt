@@ -13,4 +13,6 @@ data class TradeSummary(
 ) {
     fun getAdditionalPeople() = nsteps - 1
     fun isPending() : Boolean = tradeStatus == TradeOpportunityStatus.PENDING
+    fun isAccepted() : Boolean = tradeStatus == TradeOpportunityStatus.ACCEPTED
+    fun isRejected() : Boolean = tradeStatus == TradeOpportunityStatus.REJECTED
 }

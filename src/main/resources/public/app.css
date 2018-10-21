@@ -161,3 +161,37 @@
     text-align: center;
     border-style: outset;
 }
+
+.chatMessageContainer{
+    margin: 0 auto;
+    width: 100%;
+    border-style: outset;
+    margin-top: 15px;
+    margin-bottom: 50px;
+}
+
+.chatMessageFrom {
+    font-size: small;
+    text-align: right;
+}
+.chatMessageAuthor {
+    margin-right: 5px;
+}
+.chatMessage:nth-child(even) {
+    background-color: #c3e6e6;
+}
+.chatMessageBox {
+    border: outset;
+    height: 250px;
+    overflow-y: scroll;
+}
+.newMessage {
+    width: 95%;
+    margin-top: 3px;
+}
+.sendMessageDiv {
+    text-align: center;
+}
+.sendMessageDiv img {
+    width: 35px;
+}
