@@ -10,6 +10,10 @@ function getNotifications() {
                     "    <span aria-hidden=\"true\">&times;</span>\n" +
                     "  </button></div>");
             });
+
+            $("#notifications").on("click", function() {
+                location.href = "/myTrades"
+            });
         }
     });
 }
