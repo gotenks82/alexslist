@@ -1,15 +1,15 @@
 package example.controllers
 
+import example.clients.models.TradeOpportunityStatus
 import example.clients.models.TradeStepWithUserName
+import example.models.TradeUpdate
 import example.services.ItemService
 import example.services.MiddleManService
 import example.services.UserService
 import io.micronaut.http.HttpResponse.ok
 import io.micronaut.http.MediaType
 import io.micronaut.http.MutableHttpResponse
-import io.micronaut.http.annotation.Get
-import io.micronaut.http.annotation.Controller
-import io.micronaut.http.annotation.Produces
+import io.micronaut.http.annotation.*
 import io.micronaut.security.Secured
 import io.micronaut.views.View
 import java.security.Principal
@@ -92,7 +92,7 @@ class HomeController(
     @Secured("isAuthenticated()")
     @View("mytrade")
     @Get("/myTrade")
-    fun showTrades(principal: Principal, id: String): Map<String, Any?> = principal.let {
+    fun showTrade(principal: Principal, id: String): Map<String, Any?> = principal.let {
         val user = requireNotNull(principal.name.let { userService.findUserByEmail(it) })
         val trade = middleManService.getTrade(id)
 
@@ -108,6 +108,16 @@ class HomeController(
                 "summary" to trade.toSummary(user.id),
                 "username" to user.name
         )
+    }
+
+    @Secured("isAuthenticated()")
+    @Post("/updateTrade")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    fun updateTrade(principal: Principal, @Body update: TradeUpdate): MutableHttpResponse<Any?> = principal.let {
+        val user = requireNotNull(principal.name.let { userService.findUserByEmail(it) })
+        middleManService.updateStatus(user, update.id, TradeOpportunityStatus.valueOf(update.status))
+        ok(emptyMap<String, String>())
     }
 
 }

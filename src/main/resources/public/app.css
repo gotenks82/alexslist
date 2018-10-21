@@ -12,6 +12,12 @@
     padding-bottom: 20px;
     text-align: center;
     border-style: outset;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.tradeListResult a {
+    color: black;
 }
 
 .itemDetail {
@@ -60,6 +66,7 @@
     top: 5px;
     margin-left:10%;
     width: 80%;
+    z-index: 999;
 }
 
 .alert {
@@ -137,4 +144,20 @@
 .tradeStep {
 
     padding-bottom: 20px;
+}
+
+.statusForm {
+    margin: 0 auto;
+    padding-top: 20px;
+}
+.statusChangeButtonSpacer {
+    padding-left: 100px;
+}
+.tradeStatusChange img {
+    cursor: pointer;
+}
+.tradeDetail {
+    padding-bottom: 20px;
+    text-align: center;
+    border-style: outset;
 }

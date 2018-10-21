@@ -20,7 +20,7 @@
     <div class="tradeTitle">Suggested Trade</span></div>
     <div class="container-fluid tradeContainer">
         <div class="row">
-            <div class="tradeListResult col-md-4">
+            <div class="tradeDetail col-md-4">
                 <div class="tradeItem">
                     <div class="giveImg"><img src="static/give.png"></div>
                     <img class="tradeItemImg" th:attr="src=${summary.selling.itemImageUrl}"/>
@@ -36,13 +36,26 @@
                     <img class="getImg" src="static/get.png">
                 </div>
                 <div class="tradeStatus">
-                    <span>Status: <b><span th:text="${summary.tradeStatus}"></span></b></span>
+                    <span>Trade Status: <b><span th:text="${summary.tradeStatus}"></span></b></span>
+                </div>
+                <div class="tradeStatus">
+                    <span>Your Answer: <b><span th:text="${summary.userStatus}"></span></b></span>
                 </div>
             </div>
 
-            <div class="tradeListResult col-md-8">
+            <div class="tradeDetail col-md-8">
                 <div class="tradeStep" th:each="step,iter: ${steps}">
                     <span th:text="${iter.index + 1}">Number</span>. <span th:text="${step.buyerName}">Buyer</span> buys <img class="stepItemImg" th:alt-title="${step.interest.itemName}" th:attr="src=${step.interest.itemImageUrl}"/> from <span th:text="${step.sellerName}">Seller</span>
+                </div>
+            </div>
+        </div>
+        <div class="row" th:if="${summary.isPending()}">
+            <div class="statusForm">
+                <input type="hidden" id="tradeId" th:value="${summary.id}">
+                <div class="tradeStatusChange">
+                    <img id="acceptTrade" src="/static/accept.png">
+                    <span class="statusChangeButtonSpacer"></span>
+                    <img id="rejectTrade" src="/static/reject.png">
                 </div>
             </div>
         </div>

@@ -2,6 +2,7 @@ package example.clients
 
 import example.clients.models.Interest
 import example.clients.models.TradeOpportunity
+import example.clients.models.TradeOpportunityStatus
 import example.clients.models.TradeSummary
 import io.micronaut.http.annotation.Body
 import io.micronaut.http.annotation.Get
@@ -22,4 +23,7 @@ interface MiddleManClient {
 
     @Get("/trade/{id}")
     fun getTrade(id: String) : TradeOpportunity
+
+    @Post("/user/{id}/trades/{tradeId}/status/{status}")
+    fun updateStatus(id: String, tradeId: String, status: TradeOpportunityStatus)
 }

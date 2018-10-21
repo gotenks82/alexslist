@@ -12,4 +12,5 @@ data class TradeSummary(
         val selling: Interest
 ) {
     fun getAdditionalPeople() = nsteps - 1
+    fun isPending() : Boolean = tradeStatus == TradeOpportunityStatus.PENDING
 }

@@ -37,9 +37,12 @@
                     <span class="deltaMoney" th:if="${trade.priceDelta > 0}"> + <span th:text="${trade.priceDelta}"></span>&euro;</span>
                     <img class="getImg" src="static/get.png">
                 </div>
-                <div class="tradeStatus">
-                    <span>Status: <b><span th:text="${trade.tradeStatus}"></span></b></span>
-                </div>
+                    <div class="tradeStatus">
+                        <span>Trade Status: <b><span th:text="${trade.tradeStatus}"></span></b></span>
+                    </div>
+                    <div class="tradeStatus">
+                        <span>Your Answer: <b><span th:text="${trade.userStatus}"></span></b></span>
+                    </div>
                 </a>
             </div>
         </div>

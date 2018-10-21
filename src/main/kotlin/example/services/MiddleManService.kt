@@ -2,6 +2,7 @@ package example.services
 
 import example.clients.MiddleManClient
 import example.clients.models.Interest
+import example.clients.models.TradeOpportunityStatus
 import example.models.Item
 import example.models.User
 import javax.inject.Inject
@@ -23,6 +24,8 @@ class MiddleManService @Inject constructor(
     fun getTrades(user: User) = middleManClient.getTrades(user.id)
 
     fun getTrade(tradeId: String) = middleManClient.getTrade(tradeId)
+
+    fun updateStatus(user: User, tradeId: String, status: TradeOpportunityStatus) = middleManClient.updateStatus(user.id, tradeId, status)
 }
 
 private fun Item.toInterest() = Interest(

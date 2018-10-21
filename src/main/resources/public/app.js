@@ -13,3 +13,27 @@ function getNotifications() {
         }
     });
 }
+
+function updateTrade(id, status) {
+    $('.tradeContainer').css('cursor','wait');
+    $.ajax({
+        type:"POST",
+        url: "/updateTrade",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ id: id, status: status }),
+        dataType: "json",
+        success: function(){
+            $('.tradeContainer').css('cursor','auto');
+            location.reload();
+        }
+    })
+}
+
+$(document).ready(function() {
+    $("#acceptTrade").on("click", function() {
+        updateTrade($("#tradeId").val(), "ACCEPTED")
+    });
+    $("#rejectTrade").on("click", function() {
+        updateTrade($("#tradeId").val(), "REJECTED")
+    });
+});
