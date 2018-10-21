@@ -17,9 +17,9 @@
 <script src="/static/app.js"></script>
 <script th:if="${loggedIn}">
     $( document ).ready(function() {
-        setInterval(getNotifications, 2000)
-        if( $('#chatMessagesDiv').length ) {
-            setInterval(refreshChat($("#tradeId").val()), 1000);
+        setInterval(getNotifications, 2000);
+        refreshChat();
+        if( location.href.indexOf("myTrade") > 0 && location.href.indexOf("myTrades") < 0 ) {
 
             $(".newMessage").on( "keypress", function(event) {
                 if (event.which == 13 && !event.shiftKey) {

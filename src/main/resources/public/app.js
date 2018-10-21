@@ -33,22 +33,26 @@ function updateTrade(id, status) {
     })
 }
 
-function refreshChat(tradeId) {
-    $.ajax({
-        type:"GET",
-        url: "/messages?tradeId="+tradeId,
-        contentType: "application/json; charset=utf-8",
-        success: function(data) {
-            var div = $("#chatMessagesDiv");
-            div.empty();
-            $.each(data.messages, function (idx, message) {
-                div.append("<div class=\"chatMessage\">" +
-                    "<div class=\"chatMessageFrom\"><span class=\"chatMessageAuthor\">"+message.from+"</span><span class=\"chatMessageDate\">"+message.timestamp+"</span></div>"+
-                    "<div class=\"chatMessageContent\">"+message.content+"</div>" +
-                    "</div>");
-            });
-        }
-    });
+function refreshChat() {
+    var tradeId = $("#tradeId").val();
+    if (tradeId) {
+        $.ajax({
+            type: "GET",
+            url: "/messages?tradeId=" + tradeId,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var div = $("#chatMessagesDiv");
+                div.empty();
+                $.each(data.messages, function (idx, message) {
+                    div.append("<div class=\"chatMessage\">" +
+                        "<div class=\"chatMessageFrom\"><span class=\"chatMessageAuthor\">" + message.from + "</span><span class=\"chatMessageDate\">" + message.timestamp + "</span></div>" +
+                        "<div class=\"chatMessageContent\">" + message.content + "</div>" +
+                        "</div>");
+                });
+                setTimeout(refreshChat, 2000);
+            }
+        });
+    }
 }
 
 function sendMessage() {
